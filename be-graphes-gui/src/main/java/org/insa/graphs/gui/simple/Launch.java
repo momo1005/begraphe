@@ -18,6 +18,10 @@ import org.insa.graphs.model.io.GraphReader;
 import org.insa.graphs.model.io.PathReader;
 
 public class Launch {
+	
+	/** Nom : Morgan Yakhelef
+	 * Date : 25/03/2020
+	 */
 
     /**
      * Create a new Drawing inside a JFrame an return it.
