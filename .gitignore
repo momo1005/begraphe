@@ -9,11 +9,12 @@ doc
 .settings
 .classpath
 .maps_tf
-.javadoc
+
 
 # Editor specific files and folders
 *~
 .project
+.javadoc
 
 # Project specific files and folders
 *.mapfg
