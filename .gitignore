@@ -8,7 +8,7 @@ doc
 *.jar
 .settings
 .classpath
-.maps_tf
+maps_tf/*
 
 
 # Editor specific files and folders
