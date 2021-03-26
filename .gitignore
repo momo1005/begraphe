@@ -14,7 +14,7 @@ doc
 # Editor specific files and folders
 *~
 .project
-.javadoc
+javadoc/*
 
 # Project specific files and folders
 *.mapfg
