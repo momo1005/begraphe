@@ -210,11 +210,14 @@ public class Path {
      * 
      * @return Total length of the path (in meters).
      * 
-     * @deprecated Need to be implemented.
      */
     public float getLength() {
         // TODO:
-        return 0;
+    	float length =0;
+    	for (Arc iterateur : arcs) { /** essayons de faire un for each **/
+    		length = length + iterateur.getLength();
+    	}
+        return length;
     }
 
     /**
@@ -224,12 +227,14 @@ public class Path {
      * 
      * @return Time (in seconds) required to travel this path at the given speed (in
      *         kilometers-per-hour).
-     * 
-     * @deprecated Need to be implemented.
      */
     public double getTravelTime(double speed) {
         // TODO:
-        return 0;
+    	double time = 0;
+    	for (Arc iterateur : arcs) { /** essayons de faire un for each **/
+    		time = time + iterateur.getTravelTime(speed);
+    	}
+        return time;
     }
 
     /**
@@ -237,12 +242,15 @@ public class Path {
      * on every arc.
      * 
      * @return Minimum travel time to travel this path (in seconds).
-     * 
-     * @deprecated Need to be implemented.
+     *
      */
     public double getMinimumTravelTime() {
         // TODO:
-        return 0;
+    	double time = 0;
+    	for (Arc iterateur : arcs) { /** essayons de faire un for each **/
+    		time = time + iterateur.getMinimumTravelTime();
+    	}
+        return time;
     }
 
 }
