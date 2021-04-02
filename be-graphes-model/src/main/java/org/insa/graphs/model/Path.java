@@ -36,7 +36,53 @@ public class Path {
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
         // TODO:
-        return new Path(graph, arcs);
+        if (nodes.size()==0) {
+        	/**on a 1 seul noeuds dans la list 
+        	 * creation d'un chemin vide
+        	 */
+        	return new Path(graph);
+        	
+        } else if (nodes.size()==1) {
+        	/**on a 1 seul noeuds dans la list 
+        	 * creation d'un chemin contenant un seul noeud
+        	 */
+        	return new Path(graph, nodes.get(0));
+        } else {
+        	/**on a plusieurs noeuds dans la list */
+        	
+            int i=0;
+            for(i=0;i<nodes.size()-1;i++) {
+            	if (nodes.get(i).hasSuccessors()) {
+            		List<Arc> sucessors = nodes.get(i).getSuccessors();
+            		
+            		double min = 999999999.9;
+            		Arc plusrapide = null;
+            		
+            		for (Arc iterateur : sucessors) {
+            			
+            			/**on ne s'interesse que aux arcs entre i et i+1*/
+            			if(iterateur.getDestination()==nodes.get(i+1)) {       				
+            				/**recherche de minimum */
+            				if (iterateur.getMinimumTravelTime() < min) {
+            					min=iterateur.getLength();
+            					plusrapide=iterateur;
+            				}       				
+            			}          			
+                	}
+            		
+            		if (plusrapide!=null) {
+            			arcs.add(plusrapide);
+                    } else {
+            			throw new IllegalArgumentException("Un des noeud de la liste n'as pas de sucesseur.");
+                    }
+            		        		
+            	} else {
+            		/**exeptions car pas de sucesseur */
+            		throw new IllegalArgumentException("Un des noeud de la liste n'as pas de sucesseur.");
+                }
+            }	
+            return new Path(graph, arcs);
+        }
     }
 
     /**
@@ -50,14 +96,71 @@ public class Path {
      * 
      * @throws IllegalArgumentException If the list of nodes is not valid, i.e. two
      *         consecutive nodes in the list are not connected in the graph.
-     * 
-     * @deprecated Need to be implemented.
      */
     public static Path createShortestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
         // TODO:
-        return new Path(graph, arcs);
+        	/** si on me demande d'aller du noeur 1 au noeud 2 
+        	 * je dois trouver chemin le plus court 
+        	 * s'il y a plusieurs routes 
+        	 * */
+        
+        if (nodes.size()==0) {
+        	/**on a 1 seul noeuds dans la list 
+        	 * creation d'un chemin vide
+        	 */
+        	return new Path(graph);
+        	
+        } else if (nodes.size()==1) {
+        	/**on a 1 seul noeuds dans la list 
+        	 * creation d'un chemin contenant un seul noeud
+        	 */
+        	return new Path(graph, nodes.get(0));
+        } else {
+        	/**on a plusieurs noeuds dans la list */
+        	
+            int i=0;
+            for(i=0;i<nodes.size()-1;i++) {
+            	if (nodes.get(i).hasSuccessors()) {
+            		List<Arc> sucessors = nodes.get(i).getSuccessors();
+            		
+            		float min = (float) 999999999.9;
+            		Arc pluspetit = null;
+            		
+            		for (Arc iterateur : sucessors) {
+            			
+            			/**on ne s'interesse que aux arcs entre i et i+1*/
+            			if(iterateur.getDestination()==nodes.get(i+1)) {       				
+            				/**recherche de minimum */
+            				if (iterateur.getLength() < min) {
+            					min=iterateur.getLength();
+            					pluspetit=iterateur;
+            				}       				
+            			}
+            			
+                	}
+            		
+            		/** une fois la boucle for fini 
+            		 * on a regardé tous les sucesseurs du noeud. 
+            		 * On va pouvoir donc ajouter le plus petit arc
+            		 * a la liste finale des arcs
+            		 *on verifie que plutpetit != null car sinon exeption
+            		 */
+            		
+            		if (pluspetit!=null) {
+            			arcs.add(pluspetit);
+                    } else {
+            			throw new IllegalArgumentException("Un des noeud de la liste n'as pas de sucesseur.");
+                    }
+            		        		
+            	} else {
+            		/**exeptions car pas de sucesseur */
+            		throw new IllegalArgumentException("Un des noeud de la liste n'as pas de sucesseur.");
+                }
+            }	
+            return new Path(graph, arcs);
+        }
     }
 
     /**
@@ -197,12 +300,38 @@ public class Path {
      * </ul>
      * 
      * @return true if the path is valid, false otherwise.
-     * 
-     * @deprecated Need to be implemented.
      */
     public boolean isValid() {
         // TODO:
-        return false;
+    	boolean validation = true; /** faut bien initialiser */
+    	
+    	if (this.isEmpty()) { 
+    		return true;
+    	}
+    	
+    	if (this.size()==1) {
+    		return true;
+    	}
+    	
+    	if (arcs.get(0).getOrigin() != this.getOrigin()) {
+    		return false;
+    	}
+    	
+    	int i =0;
+    	
+    	/**Attention 
+    	 * this.size retourne le nombre de noeud
+    	 * mais nous on s'interesse ici au nombre d'arc 
+    	 * donc on regarde la taille de la liste arcs
+    	 */
+    	
+    	for (i=0; i<(arcs.size()-1); i++) {
+    		/**System.out.println(i);*/
+    		if (arcs.get(i).getDestination() != arcs.get(i+1).getOrigin() ){
+    			return false;
+    		}
+    	}
+        return validation;
     }
 
     /**
