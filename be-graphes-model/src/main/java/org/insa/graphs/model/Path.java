@@ -55,7 +55,8 @@ public class Path {
             	if (nodes.get(i).hasSuccessors()) {
             		List<Arc> sucessors = nodes.get(i).getSuccessors();
             		
-            		double min = 999999999.9;
+            		//double min = 999999999.9;
+            		float min = Float.MAX_VALUE;
             		Arc plusrapide = null;
             		
             		for (Arc iterateur : sucessors) {
@@ -125,7 +126,8 @@ public class Path {
             	if (nodes.get(i).hasSuccessors()) {
             		List<Arc> sucessors = nodes.get(i).getSuccessors();
             		
-            		float min = (float) 999999999.9;
+            		//float min = (float) 999999999.9;
+            		float min = Float.MAX_VALUE;
             		Arc pluspetit = null;
             		
             		for (Arc iterateur : sucessors) {

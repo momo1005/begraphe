@@ -137,7 +137,49 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
 
     @Override
     public void remove(E x) throws ElementNotFoundException {
-        // TODO:
+        /* TODO:
+         * Lever l'exception si la liste est vide
+         * lever l'exception si l'element n'existe pas dans la liste
+         * sinon
+         * supprimer l'element ? 
+         * le remplacer par le dernier de la liste
+         * mettre a jour la taille
+         * percolate downn pour le remettre a sa place ?
+         */
+    	
+    	if (this.isEmpty()) {
+    		//Le tas binaire est vide on ne peux pas remove d'element - On va lever l'exception
+    		throw new ElementNotFoundException(x);
+    	
+    	}else {
+    		//Le tas binaire n'est pas vide
+    		//on doit faire indexOf sur notre liste : this.array (et non sur le tas = liste + taille)
+    		int position = this.array.indexOf(x);
+    		
+    		//ATTENTION INDEXOF() regarde dans toute la liste meme après current size 
+    		//on doit verifier qu'on est < currentSize 
+    		
+    		if (position==-1 || position>=currentSize) {
+        		throw new ElementNotFoundException(x);
+    		
+    		} else {
+    			//L'element est dans la liste
+    			//1.On remplace l'element par le derniers de la liste
+    			//2.on met à jour la taille
+    			//3.on percolate down/up la ou on a supp l'element
+    			
+    			//1.On remplace l'element par le derniers de la liste
+    			this.array.set(position,this.array.get(this.currentSize-1));
+
+    			//2.on met à jour la taille
+    			this.currentSize=this.currentSize-1;
+    			
+    			//3.on percolate down la ou on a supp l'element
+    			this.percolateDown(position);
+    			this.percolateUp(position);
+    		}
+    		
+    	}
     }
 
     @Override
