@@ -157,7 +157,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
     		int position = this.array.indexOf(x);
     		
     		//ATTENTION INDEXOF() regarde dans toute la liste meme après current size 
-    		//on doit verifier qu'on est < currentSize 
+    		//on doit verifier qu'on est < currentSize (donc si on est superieur OU égale on est dans des cases qu'on veut pas toucher)
     		
     		if (position==-1 || position>=currentSize) {
         		throw new ElementNotFoundException(x);
