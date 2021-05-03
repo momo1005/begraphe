@@ -81,18 +81,21 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             		double old_cost=labels[indice].getCost();
             		double new_cost=labels[x.getSommet_Courant()].getCost()+data.getCost(arc);
             		double maj_cost=Double.min(old_cost,new_cost); //nouvelle valeur de cost
-            		labels[indice].setCost(maj_cost);
-            		
-            		//Si le cout a été mis a jour
-            		//alors l'ancienne valeur a été remplacé par une plus petite
             		if(old_cost != maj_cost) {
+            			
             			//ATTENTION :
             			//old_cost=infini -> il etait pas dans le tas : pas de soucis
             			//old-cost!=infini alors il etait deja dans le tas 
             			//Dans ce cas la on utilise remove pour ne pas le mettre 2 fois !
             			//On remove l'ancienne valeur et on insert la nouvelle(=label mis a jour)
+            			if(old_cost!=Double.POSITIVE_INFINITY) {
+            				//deja dans le tas
+            				//on le supprime maintenant avant de modifier le label car j'ai peur que le indexof() detecte plus le label sinon
+            				tas_binaire.remove(labels[indice]);	
+            			}
             			
-            			
+            			//on met a jour le cout 
+            			labels[indice].setCost(maj_cost);
             			//placer le label associé au noeud dans le tas
             	        tas_binaire.insert(labels[indice]);
             	        //on met a jour le pere
