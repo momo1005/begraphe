@@ -24,15 +24,14 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
     @Override
     protected ShortestPathSolution doRun() {        
-     // On récupere le graphe
+    	// On récupere le graphe
         final ShortestPathData data = getInputData();
         Graph graph = data.getGraph();
         
         //Nombre de noeud dans le graph
         final int nbNodes = graph.size();
         
-    	//Associer un label à chaque noeud
-    	//Les noeuds des graphes sont numérotés de 0 à N-1.
+    	
     	Label[] labels = new Label[nbNodes];
 
         //On créer et associe les labels à chaque noeud
@@ -51,15 +50,14 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         
         //On creer un tas binaire sur les labels/etiquettes du code
         //Car on va trier en fonction du min
-        //or si on met les noeud on ne va pas avoir 
         BinaryHeap<Label> tas_binaire = new BinaryHeap<Label>();
         tas_binaire.insert(labels[data.getOrigin().getId()]);
         
         
-        boolean pas_fini = true;
+        boolean pas_fini = false;
         for(Label lab : labels) {
         	if (lab.getMarqued()==false) {
-        		pas_fini=false;
+        		pas_fini=true;
         	}
         }
     
@@ -107,7 +105,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             	//on met a jour notre variable
             	for(Label lab : labels) {
                 	if (lab.getMarqued()==false) {
-                		pas_fini=false;
+                		pas_fini=true;
                 	}
                 }
             	
