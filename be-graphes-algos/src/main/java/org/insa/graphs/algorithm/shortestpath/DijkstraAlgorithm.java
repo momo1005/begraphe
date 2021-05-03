@@ -88,7 +88,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             			//old-cost!=infini alors il etait deja dans le tas 
             			//Dans ce cas la on utilise remove pour ne pas le mettre 2 fois !
             			//On remove l'ancienne valeur et on insert la nouvelle(=label mis a jour)
-            			if(old_cost!=Double.POSITIVE_INFINITY) {
+            			if(old_cost!=Double.POSITIVE_INFINITY) { //"UPDATE" p90
             				//deja dans le tas
             				//on le supprime maintenant avant de modifier le label car j'ai peur que le indexof() detecte plus le label sinon
             				tas_binaire.remove(labels[indice]);	
@@ -115,13 +115,28 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             
          }
         
-        
         ShortestPathSolution solution = null;
         
-     
-        
-        
-        // TODO:
+     // Destination has no predecessor, the solution is infeasible...
+        if (labels[data.getDestination().getId()].getFather() == null) {
+            solution = new ShortestPathSolution(data, Status.INFEASIBLE);
+        }
+        else {
+            // Create the path from the array of predecessors...
+            ArrayList<Arc> arcs = new ArrayList<>();
+            Arc arc = labels[data.getDestination().getId()].getFather();
+            while (arc != null) {
+                arcs.add(arc);
+                arc = labels[arc.getOrigin().getId()].getFather();
+            }
+
+            // Reverse the path...
+            Collections.reverse(arcs);
+
+            // Create the final solution.
+            solution = new ShortestPathSolution(data, Status.OPTIMAL, new Path(graph, arcs));
+        }
+
         return solution;
     }
 
