@@ -53,16 +53,9 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         BinaryHeap<Label> tas_binaire = new BinaryHeap<Label>();
         tas_binaire.insert(labels[data.getOrigin().getId()]);
         
-        
-        boolean pas_fini = true;
-//        for(Label lab : labels) {
-//        	if (lab.getMarqued()==false) {
-//        		pas_fini=true;
-//        	}
-//        } 
-    
+
         Label x;
-        while(pas_fini==true) {
+        while(labels[data.getDestination().getId()].getMarqued()!=true) {
         	//On enleve le min du tas
         	x=tas_binaire.findMin();
         	tas_binaire.remove(x);
@@ -107,15 +100,6 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             	}
             	
             }
-          //on met a jour notre variable
-//        	for(Label lab : labels) {
-//            	if (lab.getMarqued()==false) {
-//            		pas_fini=true;
-//            	}
-//            }
-        	if(labels[data.getDestination().getId()].getMarqued()==true) {
-        		pas_fini=false;
-        	}
             
          }
         
