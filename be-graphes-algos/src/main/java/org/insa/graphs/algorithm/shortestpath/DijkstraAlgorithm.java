@@ -46,24 +46,29 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         //On met a jour pour l'origine - Le sommet est marqué avec un cout de 0
         labels[data.getOrigin().getId()].setMarqued(true);
         labels[data.getOrigin().getId()].setCost(0);
-
         
+        // Notify observers about the first event (origin processed).
+        notifyOriginProcessed(data.getOrigin());
+
+       
         //On creer un tas binaire sur les labels/etiquettes du code
         //Car on va trier en fonction du min
         BinaryHeap<Label> tas_binaire = new BinaryHeap<Label>();
         tas_binaire.insert(labels[data.getOrigin().getId()]);
         
-
+        
         Label x;
-        while(labels[data.getDestination().getId()].getMarqued()!=true) {
+        while((labels[data.getDestination().getId()].getMarqued()!=true)&&(!tas_binaire.isEmpty())) {
         	//On enleve le min du tas
-        	x=tas_binaire.findMin();
-        	tas_binaire.remove(x);
+        	//x=tas_binaire.findMin();
+        	//tas_binaire.remove(x);
         	//ne marche plus je sais pas pourquoi :
-            //x=tas_binaire.deleteMin();
+            x=tas_binaire.deleteMin();
         	
             //On met a jour marqued de x à true
             x.setMarqued(true);
+            //Notify node has been marqued
+            notifyNodeMarked(x.getNode());
             
             //on regarde les successeur du noeud associé au label x
             //Attention ici on a des arcs le succeseur ça va etre successeur[i].getDestination()
@@ -76,8 +81,13 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             		double old_cost=labels[indice].getCost();
             		double new_cost=labels[x.getSommet_Courant()].getCost()+data.getCost(arc);
             		double maj_cost=Double.min(old_cost,new_cost); //nouvelle valeur de cost
+            		
+            		//notify if node reached for the first time
+            		if (Double.isInfinite(old_cost) && Double.isFinite(new_cost)) {
+                        notifyNodeReached(arc.getDestination());
+                    }
+            		
             		if(old_cost != maj_cost) {
-            			
             			//ATTENTION :
             			//old_cost=infini -> il etait pas dans le tas : pas de soucis
             			//old-cost!=infini alors il etait deja dans le tas 
@@ -110,6 +120,9 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             solution = new ShortestPathSolution(data, Status.INFEASIBLE);
         }
         else {
+        	// The destination has been found, notify the observers.
+            notifyDestinationReached(data.getDestination());
+            
             // Create the path from the array of predecessors...
             ArrayList<Arc> arcs = new ArrayList<>();
             Arc arc = labels[data.getDestination().getId()].getFather();
