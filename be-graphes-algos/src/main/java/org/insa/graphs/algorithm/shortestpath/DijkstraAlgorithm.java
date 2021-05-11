@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.insa.graphs.algorithm.AbstractSolution.Status;
+import org.insa.graphs.algorithm.AbstractInputData;
 import org.insa.graphs.algorithm.utils.BinaryHeap;
 import org.insa.graphs.model.Arc;
 import org.insa.graphs.model.Graph;
@@ -70,17 +71,29 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             //Notify node has been marqued
             notifyNodeMarked(x.getNode());
             
+            System.out.println("Cout du noeud n° "+x.getSommet_Courant() +" qui viens d'etre marqué ="+x.getCost());
+            
             //on regarde les successeur du noeud associé au label x
             //Attention ici on a des arcs le succeseur ça va etre successeur[i].getDestination()
             List<Arc> sucesseurs = x.getNode().getSuccessors(); 
-            
+            int nb_successeur =0;
             for (Arc arc: sucesseurs) {
+            	nb_successeur=nb_successeur+1;
             	if(data.isAllowed(arc) ) {
+            		
             		int indice = arc.getDestination().getId(); //id du node succeseur
+            		
                 	//si le succeseur n'est pas marqué
                 	if (!labels[indice].getMarqued()) {
                 		double old_cost=labels[indice].getCost();
-                		double new_cost=labels[x.getSommet_Courant()].getCost()+data.getCost(arc);
+                		double new_cost;
+                		if(data.getMode().equals(AbstractInputData.Mode.LENGTH)) { //calcul du cout enfonction de la longueur
+                			new_cost=labels[x.getSommet_Courant()].getCost()+arc.getLength();
+                		}else { //on calcul le cout en fonction du temps
+                			new_cost=labels[x.getSommet_Courant()].getCost()+arc.getMinimumTravelTime();
+                		}
+                		//double new_cost=labels[x.getSommet_Courant()].getCost()+data.getCost(arc);
+                		
                 		double maj_cost=Double.min(old_cost,new_cost); //nouvelle valeur de cost
                 		
                 		//notify if node reached for the first time
@@ -110,7 +123,11 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
                 	}
             	}
             }
-            
+        	System.out.println("Nombre de sucesseur explorés = "+nb_successeur +" et nombre de successeur du node = "+x.getNode().getNumberOfSuccessors());
+
+            if(labels[data.getDestination().getId()].getMarqued()==true) {
+            	System.out.println("Destination trouvé");
+            }
          }
         
         ShortestPathSolution solution = null;
@@ -133,9 +150,9 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
             // Reverse the path...
             Collections.reverse(arcs);
-
+            
             // Create the final solution.
-            solution = new ShortestPathSolution(data, Status.OPTIMAL, new Path(graph, arcs));
+            solution = new ShortestPathSolution(data, Status.OPTIMAL,new Path(graph,arcs));
         }
 
         return solution;
