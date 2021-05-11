@@ -86,13 +86,16 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
                 	//si le succeseur n'est pas marqué
                 	if (!labels[indice].getMarqued()) {
                 		double old_cost=labels[indice].getCost();
-                		double new_cost;
-                		if(data.getMode().equals(AbstractInputData.Mode.LENGTH)) { //calcul du cout enfonction de la longueur
-                			new_cost=labels[x.getSommet_Courant()].getCost()+arc.getLength();
-                		}else { //on calcul le cout en fonction du temps
-                			new_cost=labels[x.getSommet_Courant()].getCost()+arc.getMinimumTravelTime();
-                		}
-                		//double new_cost=labels[x.getSommet_Courant()].getCost()+data.getCost(arc);
+//                		double new_cost;
+                		
+//                		if(data.getMode().equals(AbstractInputData.Mode.LENGTH)) { //calcul du cout enfonction de la longueur
+//                			new_cost=labels[x.getSommet_Courant()].getCost()+arc.getLength();
+//                		}else { //on calcul le cout en fonction du temps
+//                			new_cost=labels[x.getSommet_Courant()].getCost()+arc.getMinimumTravelTime();
+//                		}
+                		
+                		//getCost(arc) sait si on est en mode temps ou length et prend le cout qui correspond.
+                		double new_cost=labels[x.getSommet_Courant()].getCost()+data.getCost(arc);
                 		
                 		double maj_cost=Double.min(old_cost,new_cost); //nouvelle valeur de cost
                 		
