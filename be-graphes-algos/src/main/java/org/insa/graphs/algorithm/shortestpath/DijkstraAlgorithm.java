@@ -86,8 +86,8 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
                 	//si le succeseur n'est pas marqué
                 	if (!labels[indice].getMarqued()) {
                 		double old_cost=labels[indice].getCost();
-//                		double new_cost;
                 		
+                		//PAS UTILE
 //                		if(data.getMode().equals(AbstractInputData.Mode.LENGTH)) { //calcul du cout enfonction de la longueur
 //                			new_cost=labels[x.getSommet_Courant()].getCost()+arc.getLength();
 //                		}else { //on calcul le cout en fonction du temps
