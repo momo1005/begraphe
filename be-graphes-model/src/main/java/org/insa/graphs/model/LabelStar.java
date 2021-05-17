@@ -2,11 +2,11 @@ package org.insa.graphs.model;
 
 public class LabelStar extends Label {
 	private double cost_estimated;
-	private double cost_total; //on creer pas de variable on va juste faire le calcul de la somme
+	//private double cost_total; //on creer pas de variable on va juste faire le calcul de la somme
 
-	public LabelStar(Node node) {
+	public LabelStar(Node node, double cout_estime) {
 		super(node);
-		//this.cost_total = this.cost_estimated+this.getCost();
+		this.cost_estimated = cout_estime;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -18,12 +18,18 @@ public class LabelStar extends Label {
         return this.cost_estimated;
     }
 
+	//On redefinit getCost_total
 	public double getCost_total() {
-		return cost_total;
+		return this.getCost()+this.cost_estimated;
 	}
-
-	public void setCost_total(double cost_total) {
-		this.cost_total = cost_total;
-	}
+	
+	//on a utilisé la siouxe solution consistant a definir getTotalCost dans Label
+	//L'utilisé dans compareTo
+	//Et redéfinir getTotalCost dans label*
+	//Du coup label* contuinue d'implementer l'interface Comparable<label> mais avec le bon coutTotale
+//	public int compareTo(LabelStar other) {
+//        return Double.compare(getCost_total(), other.getCost_total());
+//    }
+	
 
 }
