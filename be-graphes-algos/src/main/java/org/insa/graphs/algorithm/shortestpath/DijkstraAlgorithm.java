@@ -1,12 +1,12 @@
 package org.insa.graphs.algorithm.shortestpath;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+//import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.insa.graphs.algorithm.AbstractSolution.Status;
-import org.insa.graphs.algorithm.AbstractInputData;
+//import org.insa.graphs.algorithm.AbstractInputData;
 import org.insa.graphs.algorithm.utils.BinaryHeap;
 import org.insa.graphs.model.Arc;
 import org.insa.graphs.model.Graph;
@@ -22,18 +22,23 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         super(data);
     }
     
+    //Argument car necessaire a la fonction setlabels et doRun 
+    final ShortestPathData data = getInputData();
+    Graph graph = data.getGraph();
+    Label[] labels = new Label[graph.size()];
 
     @Override
     protected ShortestPathSolution doRun() {        
     	// On récupere le graphe
-        final ShortestPathData data = getInputData();
-        Graph graph = data.getGraph();
+//        final ShortestPathData data = getInputData();
+//        Graph graph = data.getGraph();
         
         //Nombre de noeud dans le graph
         //final int nbNodes = graph.size();
         
-//    	Label[] labels = new Label[nbNodes];
-        Label[] labels = this.setlabels(graph);
+    	//Label[] labels = new Label[nbNodes];
+        //Label[] labels = this.setlabels(graph);
+    	this.setlabels(graph,labels);
 
         //On créer et associe les labels à chaque noeud
     	//dans label on a la node
@@ -162,12 +167,11 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
     }
     
     //INITIALISATION DES LABELS
-    private Label[] setlabels(Graph graph) {
-    	Label[] labels = new Label[graph.size()];
+    //mettre en parametre ShortestPathData data et creer labels directement dedans pour pas avoir de soucis avec label et labelstar
+    private void setlabels(Graph graph,Label[] labels) {
     	for (Node node: graph.getNodes()) {
         	labels[node.getId()]=new Label(node);
         }
-    	return labels;
     }
 
 }
