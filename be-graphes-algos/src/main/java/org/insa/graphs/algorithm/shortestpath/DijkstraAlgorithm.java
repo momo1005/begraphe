@@ -30,19 +30,19 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         Graph graph = data.getGraph();
         
         //Nombre de noeud dans le graph
-        final int nbNodes = graph.size();
+        //final int nbNodes = graph.size();
         
-    	
-    	Label[] labels = new Label[nbNodes];
+//    	Label[] labels = new Label[nbNodes];
+        Label[] labels = this.setlabels(graph);
 
         //On créer et associe les labels à chaque noeud
     	//dans label on a la node
     	//et sommet_courant = id de la node = indice du tableau
     	//les label sont rangé selon leurs id -> a l'indice de l'id boom on a le label associé
     	//id du node < nombre de node (normalemenrt c'est forcément vrai)
-        for (Node node: graph.getNodes()) {
-        	labels[node.getId()]=new Label(node);
-        }
+//        for (Node node: graph.getNodes()) {
+//        	labels[node.getId()]=new Label(node);
+//        }
         
         //On met a jour pour l'origine - Le sommet est marqué avec un cout de 0
         labels[data.getOrigin().getId()].setMarqued(true);
@@ -159,6 +159,15 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         }
 
         return solution;
+    }
+    
+    //INITIALISATION DES LABELS
+    private Label[] setlabels(Graph graph) {
+    	Label[] labels = new Label[graph.size()];
+    	for (Node node: graph.getNodes()) {
+        	labels[node.getId()]=new Label(node);
+        }
+    	return labels;
     }
 
 }
