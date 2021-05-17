@@ -37,6 +37,10 @@ public class Label implements Comparable<Label> {
         return this.cost;
     }
 	
+	public double getCost_total() {
+        return this.cost;
+    }
+	
 	public int getSommet_Courant() {
         return this.sommet_courant;
     }
@@ -73,7 +77,7 @@ public class Label implements Comparable<Label> {
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
     public int compareTo(Label other) {
-        return Double.compare(getCost(), other.getCost());
+        return Double.compare(getCost_total(), other.getCost_total());
     }
 	
 	
