@@ -22,33 +22,27 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         super(data);
     }
     
-    //Argument car necessaire a la fonction setlabels et doRun 
     final ShortestPathData data = getInputData();
-    Graph graph = data.getGraph();
-    Label[] labels = new Label[graph.size()];
+
 
     @Override
     protected ShortestPathSolution doRun() {        
-    	// On récupere le graphe
-//        final ShortestPathData data = getInputData();
-//        Graph graph = data.getGraph();
+        //Argument car necessaire a la fonction setlabels et doRun 
+        Graph graph = data.getGraph();
+        //Pas de soucis avec labelStar car label star herite de label
+        //donc on peut mettre des label star dans un tableau de label
+        Label[] labels = new Label[graph.size()];
         
         //Nombre de noeud dans le graph
         //final int nbNodes = graph.size();
-        
-    	//Label[] labels = new Label[nbNodes];
-        //Label[] labels = this.setlabels(graph);
-    	this.setlabels(graph,labels);
+    	this.init(graph,labels);
 
         //On créer et associe les labels à chaque noeud
     	//dans label on a la node
     	//et sommet_courant = id de la node = indice du tableau
     	//les label sont rangé selon leurs id -> a l'indice de l'id boom on a le label associé
     	//id du node < nombre de node (normalemenrt c'est forcément vrai)
-//        for (Node node: graph.getNodes()) {
-//        	labels[node.getId()]=new Label(node);
-//        }
-        
+    	
         //On met a jour pour l'origine - Le sommet est marqué avec un cout de 0
         labels[data.getOrigin().getId()].setMarqued(true);
         labels[data.getOrigin().getId()].setCost(0);
@@ -76,7 +70,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             //Notify node has been marqued
             notifyNodeMarked(x.getNode());
             
-            System.out.println("Cout du noeud n° "+x.getSommet_Courant() +" qui viens d'etre marqué ="+x.getCost());
+            System.out.println("Cout du noeud n° "+x.getSommet_Courant() +" qui viens d'etre marqué ="+x.getCost()+" cout estimer = "+x.getCost_Estimated()+ " et cout totale = "+x.getCost_total());
             
             //on regarde les successeur du noeud associé au label x
             //Attention ici on a des arcs le succeseur ça va etre successeur[i].getDestination()
@@ -132,7 +126,8 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             	}
             }
         	System.out.println("Nombre de sucesseur explorés = "+nb_successeur +" et nombre de successeur du node = "+x.getNode().getNumberOfSuccessors());
-
+        	System.out.println("tas valide ?"+tas_binaire.isValid());
+        	
             if(labels[data.getDestination().getId()].getMarqued()==true) {
             	System.out.println("Destination trouvé");
             }
@@ -168,7 +163,8 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
     
     //INITIALISATION DES LABELS
     //mettre en parametre ShortestPathData data et creer labels directement dedans pour pas avoir de soucis avec label et labelstar
-    private void setlabels(Graph graph,Label[] labels) {
+
+    protected void init(Graph graph,Label[] labels) {
     	for (Node node: graph.getNodes()) {
         	labels[node.getId()]=new Label(node);
         }
