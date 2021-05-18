@@ -69,6 +69,11 @@ public class Label implements Comparable<Label> {
         this.father=pere;
     }
 	
+	//pas de cout estimer avec dijstra normal
+	public double getCost_Estimated() {
+        return 0;
+    }
+	
 	/**
      * Compare the cost of this label with the cost of the given label.
      * 
@@ -76,9 +81,26 @@ public class Label implements Comparable<Label> {
      * 
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
+	//-1 si other plus grand
+	//0 si égaux
+	//1 si le notre (this) est plus grand
+	//ATTENTION BESOIN DE DETAILLER COMPARE TO CAR 
+	//En cas d'égalité, on considèrera en premier le sommet ayant le plus petit coût estimé à la destination.
     public int compareTo(Label other) {
-        return Double.compare(getCost_total(), other.getCost_total());
+    	if(this.getCost_total()<other.getCost_total()) {
+    		return -1;
+    	} else if (this.getCost_total()>other.getCost_total()) {
+    		return 1;
+    	} else { //egalité on regarde le sommet ayant le plus petit cout estimed
+    		if(this.getCost_Estimated()==other.getCost_Estimated()) {
+    			//soit on a deux label soit les cout estimé des labels star sont égaux => egalité
+    			return 0;
+    		} else if (this.getCost_Estimated()<other.getCost_Estimated()) {
+    			return -1;
+    		} else {
+    			return 1;
+    		}
+    	}
     }
-	
 	
 }
