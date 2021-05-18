@@ -197,7 +197,21 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         this.percolateDown(0);
         return minItem;
     }
-
+    
+  public boolean isValid() {
+	boolean result = true;
+	if (isEmpty()) {
+        return result;
+	}
+	for (E element : this.array) {
+		if(element.compareTo(this.array.get(this.array.indexOf(element)))==-1) {
+			result =false;
+		}
+	}
+	return result;
+	
+} 
+    
     /**
      * Creates a multi-lines string representing a sorted view of this binary heap.
      * 
