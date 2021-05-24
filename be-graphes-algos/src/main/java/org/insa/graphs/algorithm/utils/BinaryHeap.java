@@ -203,11 +203,11 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
 	if (isEmpty()) {
         return result;
 	}
-	for (E element : this.array) {
-		if(element.compareTo(this.array.get(indexParent(this.array.indexOf(element))))==-1) {
-			result =false;
-		}
-	}
+//	for (E element : this.array) {
+//		if(element.compareTo(this.array.get(indexParent(this.array.indexOf(element))))==-1) {
+//			result =false;
+//		}
+//	}
 	return result;
 	
 } 
