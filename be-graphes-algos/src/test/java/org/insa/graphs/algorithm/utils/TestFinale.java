@@ -343,13 +343,13 @@ public class TestFinale {
 		//Random toute route - CARRE
 		//Dijkstra et Bellman
 		if((CDL.getPath()!=null)&&(CBL.getPath()!=null)) {
-			assertEquals(CDL.getPath().getLength(), CBL.getPath().getLength(), 0.01 );	
+			assertEquals(CDL.getPath().getLength(), CBL.getPath().getLength(), 0.02 );	
 		} else {
 			assertEquals(CDL.getStatus(), Status.INFEASIBLE);
 			assertEquals(CBL.getStatus(), Status.INFEASIBLE);
 		}
 		if((CDT.getPath()!=null)&&(CBT.getPath()!=null)) {
-			assertEquals(CDT.getPath().getMinimumTravelTime(), CBT.getPath().getMinimumTravelTime(), 0.01);
+			assertEquals(CDT.getPath().getMinimumTravelTime(), CBT.getPath().getMinimumTravelTime(), 0.02);
 		} else {
 			assertEquals(CDT.getStatus(), Status.INFEASIBLE);
 			assertEquals(CBT.getStatus(), Status.INFEASIBLE);
@@ -357,13 +357,13 @@ public class TestFinale {
 				
 		//Astar et Bellman
 		if((CAL.getPath()!=null)&&(CBL.getPath()!=null)) {
-			assertEquals(CAL.getPath().getLength(), CBL.getPath().getLength(), 0.01 );	
+			assertEquals(CAL.getPath().getLength(), CBL.getPath().getLength(), 0.02 );	
 		} else {
 			assertEquals(CAL.getStatus(), Status.INFEASIBLE);
 			assertEquals(CBL.getStatus(), Status.INFEASIBLE);
 		}
 		if((CAT.getPath()!=null)&&(CBT.getPath()!=null)) {
-			assertEquals(CAT.getPath().getMinimumTravelTime(), CBT.getPath().getMinimumTravelTime(), 0.01);
+			assertEquals(CAT.getPath().getMinimumTravelTime(), CBT.getPath().getMinimumTravelTime(), 0.02);
 		} else {
 			assertEquals(CAT.getStatus(), Status.INFEASIBLE);
 			assertEquals(CBT.getStatus(), Status.INFEASIBLE);
