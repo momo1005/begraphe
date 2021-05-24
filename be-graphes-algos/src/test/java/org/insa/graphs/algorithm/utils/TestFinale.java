@@ -3,8 +3,8 @@ package org.insa.graphs.algorithm.utils;
 import static org.junit.Assert.*;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
+//import java.util.ArrayList;
+//import java.util.Arrays;
 import java.util.List;
 
 import org.insa.graphs.algorithm.ArcInspector;
@@ -13,14 +13,14 @@ import org.insa.graphs.algorithm.AbstractSolution.Status;
 import org.insa.graphs.algorithm.shortestpath.*;
 
 import org.insa.graphs.model.*;
-import org.insa.graphs.model.io.*;
-import org.junit.Assume;
+//import org.insa.graphs.model.io.*;
+//import org.junit.Assume;
 import org.junit.Test;
 
 import org.insa.graphs.model.io.BinaryGraphReader; 
 import org.insa.graphs.model.io.GraphReader; 
-import org.insa.graphs.model.io.BinaryPathReader;
-import org.insa.graphs.model.io.PathReader;
+//import org.insa.graphs.model.io.BinaryPathReader;
+//import org.insa.graphs.model.io.PathReader;
 
 import java.util.Random;
 
@@ -403,13 +403,13 @@ public class TestFinale {
 	
 	//Autre Test sans oracle
 	
-	//2
+	//2 :
 	//D'après le cours nous savons que :
 	//"Le sous chemin de plus court chemin sont des plus court chemin"
 	//C'est une condition d'optimalité elle est nécessaire mais pas suffisante.
 	//Ayant le même degré de verification (necessaire mais pas suffisante) que le test d'inegalité triangulaire je ne vais pas le coder
 	
-	//Conclusion
+	//Conclusion :
 	//Sans oracle nous pouvons verifier des conditions necessaire.
 	//Mais je ne trouve pas de test sur les conditions suffisante.
 	//Cela ne nous permet pas de verifier que notre algortihme retourne une soltion optimale
