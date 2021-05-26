@@ -198,18 +198,28 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         return minItem;
     }
     
-  public boolean isValid() {
-	boolean result = true;
-	if (isEmpty()) {
-        return result;
-	}
-//	for (E element : this.array) {
-//		if(element.compareTo(this.array.get(indexParent(this.array.indexOf(element))))==-1) {
-//			result =false;
-//		}
-//	}
+    public boolean isValid() {
+    	boolean result = false;
+    	if (isEmpty()) {
+    		result=true;
+    	} else {
+    		result=true;
+    		for (int i=0; i<this.currentSize&result; i++) {
+    			int index_gauche = indexLeft(i) ; 
+    			int index_droit= indexLeft(i) + 1 ; 
+		    			
+    			if (index_gauche<this.currentSize) {
+		    		if (index_gauche < i) {
+		    			result = false ; 
+		    		}
+    			} else if (index_droit<this.currentSize) {
+		    		if (index_droit < i) {
+		    			result = false ;
+		    		}
+    			}
+    		}
+    	}
 	return result;
-	
 } 
     
     /**
