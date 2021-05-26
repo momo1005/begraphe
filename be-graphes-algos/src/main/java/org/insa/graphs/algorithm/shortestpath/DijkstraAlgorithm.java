@@ -126,7 +126,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             	}
             }
         	//System.out.println("Nombre de sucesseur explorés = "+nb_successeur +" et nombre de successeur du node = "+x.getNode().getNumberOfSuccessors());
-        	System.out.println("tas valide ?"+tas_binaire.isValid());
+        	//System.out.println("tas valide ?"+tas_binaire.isValid());
         	
 //            if(labels[data.getDestination().getId()].getMarqued()==true) {
 //            	System.out.println("Destination trouvé");
