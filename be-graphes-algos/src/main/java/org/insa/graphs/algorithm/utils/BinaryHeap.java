@@ -204,7 +204,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
     		result=true;
     	} else {
     		result=true;
-    		for (int i=0; i<this.currentSize&result; i++) {
+    		for (int i=0; (i<this.currentSize); i++) {
     			int index_gauche = indexLeft(i) ; 
     			int index_droit= indexLeft(i) + 1 ; 
 		    			
