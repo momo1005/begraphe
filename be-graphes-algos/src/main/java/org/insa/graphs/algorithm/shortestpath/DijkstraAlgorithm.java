@@ -70,7 +70,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             //Notify node has been marqued
             notifyNodeMarked(x.getNode());
             
-            System.out.println("Cout du noeud n° "+x.getSommet_Courant() +" qui viens d'etre marqué ="+x.getCost()+" cout estimer = "+x.getCost_Estimated()+ " et cout totale = "+x.getCost_total());
+            //System.out.println("Cout du noeud n° "+x.getSommet_Courant() +" qui viens d'etre marqué ="+x.getCost()+" cout estimer = "+x.getCost_Estimated()+ " et cout totale = "+x.getCost_total());
             
             //on regarde les successeur du noeud associé au label x
             //Attention ici on a des arcs le succeseur ça va etre successeur[i].getDestination()
@@ -126,11 +126,11 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             	}
             }
         	//System.out.println("Nombre de sucesseur explorés = "+nb_successeur +" et nombre de successeur du node = "+x.getNode().getNumberOfSuccessors());
-        	//System.out.println("tas valide ?"+tas_binaire.isValid());
+        	System.out.println("tas valide ?"+tas_binaire.isValid());
         	
-            if(labels[data.getDestination().getId()].getMarqued()==true) {
-            	System.out.println("Destination trouvé");
-            }
+//            if(labels[data.getDestination().getId()].getMarqued()==true) {
+//            	System.out.println("Destination trouvé");
+//            }
          }
         
         ShortestPathSolution solution = null;
